@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BaseError, useWriteContract } from "wagmi";
-import { InputBoxABI } from "./utils/abi";
-import { InputBoxAddress } from "./utils/addresses";
+import { InputBoxABI } from "../../utils/abi";
+import { InputBoxAddress } from "../../utils/addresses";
 import { stringToHex } from "viem";
 
 const SimpleInput = () => {
@@ -9,7 +9,6 @@ const SimpleInput = () => {
   const [inputValue, setInputValue] = useState("");
 
   const {
-    data: hash,
     isPending,
     isSuccess,
     error,
@@ -48,7 +47,6 @@ const SimpleInput = () => {
         {isPending ? <span>Sending...</span> : <span>Send</span>}
       </button>
 
-      {hash && <p className="w-64 overflow-hidden">Transaction Hash: {hash}</p>}
       {isSuccess && (
         <p className="text-green-500 font-bold">Transaction Sent</p>
       )}

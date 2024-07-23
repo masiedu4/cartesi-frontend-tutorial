@@ -3,6 +3,8 @@ import {
   anvil,
   arbitrum,
   arbitrumGoerli,
+  base,
+  baseSepolia,
   mainnet,
   optimism,
   optimismGoerli,
@@ -20,6 +22,8 @@ export const config = createConfig({
     arbitrumGoerli,
     optimismGoerli,
     optimism,
+    base,
+    baseSepolia,
   ],
   connectors: [
     injected(),
@@ -27,11 +31,9 @@ export const config = createConfig({
     walletConnect({ projectId: import.meta.env.VITE_WC_PROJECT_ID }),
   ],
   client({ chain }) {
-    return createClient({ chain, transport: http() })
+    return createClient({ chain, transport: http() });
   },
 });
-
-
 
 declare module "wagmi" {
   interface Register {

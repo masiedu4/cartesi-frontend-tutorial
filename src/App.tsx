@@ -1,17 +1,24 @@
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { useState } from "react";
-import SimpleInput from "./SimpleInput";
+import SimpleInput from "./components/inputs/SimpleInput";
+import DepositEther from "./components/inputs//DepositEther";
+import DepositErc20 from "./components/inputs/DepositERC20";
+import DepositErc721 from "./components/inputs/DepositERC721";
+import Notices from "./components/outputs/Notices";
+import Reports from "./components/outputs/Reports";
+import Vouchers from "./components/outputs/Vouchers";
 
 function App() {
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
-
   const { chains, switchChain } = useSwitchChain();
   const [isChainDropdownOpen, setIsChainDropdownOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center p-4">
+    <div className=" min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex gap-4 items-center justify-center p-4">
+      {/* inputs */}
+
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full space-y-8">
         <div className="space-y-4">
           <h2 className="text-3xl font-extrabold text-gray-900 text-center">
@@ -111,7 +118,21 @@ function App() {
           </div>
         )}
 
-        {account.status === "connected" && <SimpleInput />}
+        {account.status === "connected" && (
+          <>
+            <SimpleInput />
+            <DepositEther />
+            <DepositErc20 />
+            <DepositErc721 />
+          </>
+        )}
+      </div>
+
+      {/* outputs */}
+      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full space-y-8">
+        <Notices />
+        <Reports />
+        <Vouchers />
       </div>
     </div>
   );
